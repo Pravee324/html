@@ -1,0 +1,142 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Review</title>
+    <style>
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-image: url('login.jpg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .form-container {
+            background-color: #f2f2f2; 
+            padding: 10px; 
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px; 
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 3px; 
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 8px; 
+            margin-bottom: 10px; 
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px; 
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+       
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 8px; 
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Submit Your Review</h2>
+        <form id="reviewForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="university">University:</label>
+            <input type="text" id="university" name="university" required>
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating" required>
+                <option value="1">1-Poor</option>
+                <option value="2">2-Fair</option>
+                <option value="3">3-Good</option>
+                <option value="4">4-very Good</option>
+                <option value="5">5-Excellent</option>
+            </select>
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" rows="3" required></textarea> <!-- Reduced rows to decrease height -->
+
+            <label for="email">Email Address (optional):</label>
+            <input type="email" id="email" name="email">
+
+            <label for="date">Date of Review:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Submit</button>
+            
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const university = document.getElementById('university').value;
+            const rating = document.getElementById('rating').value;
+            const comments = document.getElementById('comments').value;
+            const email = document.getElementById('email').value || 'N/A';  
+            const date = document.getElementById('date').value;
+
+            const review = {
+                name: name,
+                university: university,
+                rating: rating,
+                comments: comments,
+                email: email,
+                date: date
+            };
+
+            let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+            reviews.push(review);
+
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+
+            
+            alert('Review submitted successfully!');
+            window.location.href = 'homepage.html';
+        });
+    </script>
+</body>
+</html>

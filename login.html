@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Review</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        /* Basic styling */
+        body {
+            background: url('login.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-card {
+            background: #007bff; /* Card background color */
+            color: white; /* White text color */
+            border-radius: 10px; /* Rounded corners for cards */
+            padding: 15px; /* Padding inside the card */
+            margin: 15px 0; /* Vertical spacing between cards */
+            text-decoration: none; /* Remove underline */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Shadow for cards */
+            display: block; /* Make cards block-level elements */
+            font-size: 1.2rem; /* Font size for cards */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        /* Card Hover Effect */
+        .nav-card:hover {
+            transform: translateY(-2px); /* Lift effect */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            padding: 40px; /* Padding inside the container */
+            text-align: center; /* Center align text */
+            max-width: 400px; /* Maximum width for the container */
+            width: 100%; /* Full width on small screens */
+            margin: 100px auto; /* Center container on page */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login to University Review System</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            <button type="submit" class="nav-card">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting in the default way
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Define admin credentials (these should typically be stored securely)
+            const adminEmail = 'admin@university.com';
+            const adminPassword = 'admin123';
+
+            // Check if the credentials match the admin credentials
+            if (email === adminEmail && password === adminPassword) {
+                alert('Admin login successful!');
+                window.location.href = 'adminhomepage.html'; // Redirect to admin page
+            } else if (email && password) {
+                alert('Login successful!');
+                window.location.href = 'homepage.html'; // Redirect to homepage after successful login
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+    </script>
+</body>
+</html>

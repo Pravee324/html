@@ -1,0 +1,94 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('login.jpg');
+            background-size:100% 100% ;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f2f2f2;
+            padding: 20px;
+            border-radius: 80px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+       
+.back-button {
+            display: block;
+            width: 35%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+        }
+
+        .back-button:hover {
+            background-color:#12a53c;
+      
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Reviews from Students</h2>
+        <div id="reviewsList">
+          
+        </div>
+        <a href="submitreview.html" class="back-button">Back to Submit Review</a>
+        <a href="homepage.html" class="back-button">Home Page</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewsList = document.getElementById('reviewsList');
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+           
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = '<p>No reviews submitted yet.</p>';
+            } else {
+                reviews.forEach(review => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.className = 'review';
+                    reviewDiv.innerHTML = `
+                     <div class="review-header">
+                      <small><b> Name:</b> ${review.name}</small><br>
+                       <small><b>University name:</b>(${review.university})</small><br>
+                       <small> <b>Rating:</b> ${review.rating}</small></div>
+                        <small><b>Email:</b> ${review.email}</small><br>
+                        <small><b>Date:</b> ${review.date}</small><br>
+                        <small><b>Comments:</b><p>${review.comments}</small></p>
+                    `;
+                    reviewsList.appendChild(reviewDiv);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
